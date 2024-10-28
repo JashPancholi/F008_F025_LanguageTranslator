@@ -1,0 +1,4 @@
+-Python language translator project
+-Made by Jash Pancholi and Aryan Pissal
+-It uses Google Translate API and tkinter GUI to provide an appropriate environment for language translation
+-we seek to improve the UI further, add a speech-to-text feature for vocal input and text-to-speech functionality for vocal output of the translated text
