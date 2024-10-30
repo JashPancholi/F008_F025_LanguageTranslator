@@ -5,15 +5,9 @@ from tkinter import messagebox
 
 # Translate function to handle translation logic
 def translate_function():
-    if (len(src_entry.get("1.0", "end-1c")) > 1):
-        src_v = src_entry.get("1.0", "end-1c").lower().strip().replace(" ", "")
-    else:
-        src_v = None
-
-    if (len(dest_entry.get("1.0", "end-1c")) > 1):
-        dest_v = dest_entry.get("1.0", "end-1c").lower().strip().replace(" ", "")
-    else:
-        dest_v = None
+    # Check for source and target languages
+    src_v = src_entry.get("1.0", "end-1c").strip().lower() or None
+    dest_v = dest_entry.get("1.0", "end-1c").strip().lower() or None
 
     # Check if text is provided for translation
     if (len(text_entry.get("1.0", "end-1c")) <= 1):
@@ -21,11 +15,11 @@ def translate_function():
     else:
         text_v = text_entry.get("1.0", "end-1c")
         # Translate based on user inputs for source and destination
-        if (not src_v) and (not dest_v):
+        if not src_v and not dest_v:
             translated_text = translator_object.translate(text_v).text
-        elif (not src_v):
+        elif not src_v:
             translated_text = translator_object.translate(text_v, dest=dest_v).text
-        elif (not dest_v):
+        elif not dest_v:
             translated_text = translator_object.translate(text_v, src=src_v).text
         else:
             translated_text = translator_object.translate(text_v, src=src_v, dest=dest_v).text
@@ -36,19 +30,16 @@ def translate_function():
         output_entry.insert(END, translated_text)
         output_entry.config(state=DISABLED)  # Make output read-only
 
-
-# Clear function to reset all input fields
+# Clear function to reset all input fields and output
 def clear():
     dest_entry.delete("1.0", "end-1c")
     src_entry.delete("1.0", "end-1c")
     text_entry.delete("1.0", "end-1c")
-    output_entry.config(state=NORMAL)
-    output_entry.delete("1.0", "end-1c")
-    output_entry.config(state=DISABLED)
+
 
 # Main window setup
 window = Tk()
-window.geometry("600x450")
+window.geometry("800x600")
 window.title("PythonGeeks Language Translator")
 window.configure(bg="#F7F7F9")
 
